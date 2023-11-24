@@ -7,6 +7,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("first_file", type=str, help="первое слово")
 parser.add_argument("second_file", type=str, help="второе слово")
+parser.add_argument("-f", "--format", type=str)
 args = parser.parse_args()
 
 
