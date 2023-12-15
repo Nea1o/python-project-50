@@ -23,6 +23,7 @@ jobs:
           pip install poetry
           make install
           pip install coverage
+          pip install pytest
       - name: Run linter and pytest
         run: |
           make lint
