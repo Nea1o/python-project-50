@@ -12,9 +12,9 @@ parser.add_argument("-f", "--format", type=str)
 args = parser.parse_args()
 
 
-def main():
-    generate_diff(args.first_file, args.second_file)
+def main(file1, file2):
+    return generate_diff(file1, file2)
 
 
 if __name__ == "__main__":
-    main()
+    main(args.first_file, args.second_file)
