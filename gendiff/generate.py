@@ -22,7 +22,7 @@ def generate_diff(first_file, second_file):
 def dict_in_str(dct):
     result = "{ \n"
     for keys, values in dct.items():
-        if type(values) == bool:
+        if type(values) is bool:
             result += f"{keys}: {str(values).lower()} \n"
         else:
             result += f"{keys}: {values} \n"
