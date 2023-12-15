@@ -5,10 +5,8 @@ import pytest
 @pytest.fixture()
 def result_gendiff():
     result = generate_diff(
-        "/home/neal/Рабочий стол/Study/Project2"
-        "/gendiff/tests/fixtures/file1.json",
-        "/home/neal/Рабочий стол/Study/Project2"
-        "/gendiff/tests/fixtures/file2.json")
+        "gendiff/tests/fixtures/file1.json",
+        "gendiff/tests/fixtures/file2.json")
     return result
 
 
