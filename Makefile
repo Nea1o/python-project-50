@@ -17,6 +17,6 @@ lint:
 	poetry run flake8 gendiff
 
 tests:
-	poetry run pytest
+	poetry run pytest --cov=gendiff --cov-report xml gendiff/tests/
 uninstall:
 	python3 -m pip uninstall dist/*.whl
