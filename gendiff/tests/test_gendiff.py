@@ -3,15 +3,50 @@ import pytest
 
 
 @pytest.fixture()
-def result_gendiff():
-    result = generate_diff(
-        "gendiff/tests/fixtures/file1.json",
-        "gendiff/tests/fixtures/file2.json")
+def result_gendiff(path1, path2):
+    result = generate_diff(path1, path2)
     return result
 
 
 def test_gendiff_func(result_gendiff):
-    result_func = result_gendiff
-    assert result_func == ("{ \n  - follow: false \n    host: hexlet.io"
-                           " \n  - proxy: 123.234.53.22 \n  - timeout: 50"
-                           " \n  + timeout: 20 \n  + verbose: true \n}")
+    result_func1 = result_gendiff(path1="gendiff/tests/fixtures/file1.yaml", path2="gendiff/tests/fixtures/file2.yaml")
+    assert result_func1 == ("{ \n  - follow: false \n    host: hexlet.io"
+                            " \n  - proxy: 123.234.53.22 \n  - timeout: 50"
+                            " \n  + timeout: 20 \n  + verbose: true \n}")
+    result_func2 = result_gendiff(path1="gendiff/tests/fixtures/file1.json", path2="gendiff/tests/fixtures/file2.json")
+    assert result_func2 == ("{ \n  - follow: false \n    host: hexlet.io"
+                            " \n  - proxy: 123.234.53.22 \n  - timeout: 50"
+                            " \n  + timeout: 20 \n  + verbose: true \n}")
+    result_func3 = result_gendiff(path1="gendiff/tests/fixtures/file3.yaml", path2="gendiff/tests/fixtures/file4.yaml")
+    assert result_func3 == (
+        "'{\n", '    common: {\n', '      + follow: False\n', '        setting1: Value 1\n', '      - setting2: 200\n',
+        '      - setting3: True\n', '      + setting3: None\n', '      + setting4: blah blah\n',
+        '      + setting5: {\n',
+        '            key5: value5\n', '        }\n', '        setting6: {\n', '            doge: {\n',
+        '              - wow: \n', '              + wow: so much\n', '            }\n', '            key: value\n',
+        '          + ops: vops\n', '        }\n', '    }\n', '    group1: {\n', '      - baz: bas\n',
+        '      + baz: bars\n',
+        '        foo: bar\n', '      - nest: {\n', '            key: value\n', '        }\n', '      + nest: str\n',
+        '    }\n', '  - group2: {\n', '        abc: 12345\n', '        deep: {\n', '            id: 45\n',
+        '        }\n',
+        '    }\n', '  + group3: {\n', '        deep: {\n', '            id: {\n', '                number: 45\n',
+        '            }\n', '        }\n', '        fee: 100500\n', '    }\n', "}'"
+
+    )
+
+    result_func4 = result_gendiff(path1="gendiff/tests/fixtures/file3.json", path2="gendiff/tests/fixtures/file4.json")
+    assert result_func4 == (
+        "'{\n", '    common: {\n', '      + follow: False\n', '        setting1: Value 1\n', '      - setting2: 200\n',
+        '      - setting3: True\n', '      + setting3: None\n', '      + setting4: blah blah\n',
+        '      + setting5: {\n',
+        '            key5: value5\n', '        }\n', '        setting6: {\n', '            doge: {\n',
+        '              - wow: \n', '              + wow: so much\n', '            }\n', '            key: value\n',
+        '          + ops: vops\n', '        }\n', '    }\n', '    group1: {\n', '      - baz: bas\n',
+        '      + baz: bars\n',
+        '        foo: bar\n', '      - nest: {\n', '            key: value\n', '        }\n', '      + nest: str\n',
+        '    }\n', '  - group2: {\n', '        abc: 12345\n', '        deep: {\n', '            id: 45\n',
+        '        }\n',
+        '    }\n', '  + group3: {\n', '        deep: {\n', '            id: {\n', '                number: 45\n',
+        '            }\n', '        }\n', '        fee: 100500\n', '    }\n', "}'"
+
+    )
