@@ -1,6 +1,7 @@
 import yaml
 import json
 from gendiff.stylish import stylish
+# flake8: noqa: C901
 
 
 def pars_file(path_file):
