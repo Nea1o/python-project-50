@@ -1,5 +1,4 @@
 from gendiff.generate import generate_diff
-import pytest
 
 
 def result_gendiff(path1, path2):
