@@ -2,23 +2,28 @@ from gendiff.generate import generate_diff
 import pytest
 
 
-@pytest.fixture()
 def result_gendiff(path1, path2):
     result = generate_diff(path1, path2)
     return result
 
 
-def test_gendiff_func(result_gendiff):
+def test_gendiff_func1(result_gendiff):
     result_func1 = result_gendiff(path1="gendiff/tests/fixtures/file1.yaml",
                                   path2="gendiff/tests/fixtures/file2.yaml")
     assert result_func1 == ("{ \n  - follow: false \n    host: hexlet.io"
                             " \n  - proxy: 123.234.53.22 \n  - timeout: 50"
                             " \n  + timeout: 20 \n  + verbose: true \n}")
+
+
+def test_gendiff_func2(result_gendiff):
     result_func2 = result_gendiff(path1="gendiff/tests/fixtures/file1.json",
                                   path2="gendiff/tests/fixtures/file2.json")
     assert result_func2 == ("{ \n  - follow: false \n    host: hexlet.io"
                             " \n  - proxy: 123.234.53.22 \n  - timeout: 50"
                             " \n  + timeout: 20 \n  + verbose: true \n}")
+
+
+def test_gendiff_func3(result_gendiff):
     result_func3 = result_gendiff(path1="gendiff/tests/fixtures/file3.yaml",
                                   path2="gendiff/tests/fixtures/file4.yaml")
     assert result_func3 == (
@@ -45,6 +50,8 @@ def test_gendiff_func(result_gendiff):
         '        fee: 100500\n', '    }\n', "}'"
     )
 
+
+def test_gendiff_func4(result_gendiff):
     result_func4 = result_gendiff(path1="gendiff/tests/fixtures/file3.json",
                                   path2="gendiff/tests/fixtures/file4.json")
     assert result_func4 == (
