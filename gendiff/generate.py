@@ -1,6 +1,9 @@
 import yaml
 import json
-from gendiff.stylish import stylish
+
+from gendiff.format import stylish_format, plain_format
+
+
 # flake8: noqa: C901
 
 
@@ -14,7 +17,7 @@ def pars_file(path_file):
         return path_file
 
 
-def generate_diff(first_file, second_file):
+def generate_diff(first_file, second_file, format_name=stylish_format):
     result_dict = {}
     file1 = pars_file(first_file)
     file2 = pars_file(second_file)
@@ -30,4 +33,9 @@ def generate_diff(first_file, second_file):
         elif key in file1 and key in file2:
             result_dict[f"- {key}"] = file1[key]
             result_dict[f"+ {key}"] = file2[key]
-    return stylish(result_dict)
+    if format_name == "stylish":
+        return stylish_format(result_dict)
+    if format_name == "plain":
+        return plain_format(result_dict)
+
+
